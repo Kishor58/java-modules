@@ -1,0 +1,77 @@
+What is a variable?
+A variable is like a container where you store a value (like a name, number, or true/false).
+
+Types of variables used:
+
+Type	  Variable Name	    Value	 Description
+int	          age	          25  	 Whole number
+String	      name	         "Aman"	  Text
+float	      height	      5.9f	  Decimal number
+boolean	      isStudent	      true	  True or false
+
+
+📝 Variable Rules in Java
+
+1.Must start with a letter, _, or $
+2.No spaces allowed
+3.Can't use Java keywords (like class, int, etc.)
+4.Variable names are case-sensitive.
+
+There are two types of the variable :
+1.Based On Datatypes
+2.Based On Scope and Visiblity
+
+1.Based On Data Type : A variable which is Depent on datatypes that variable is called based on data type variable .
+we have two types of the this variable
+a.Primitive Variables
+b.Non Primitive Variables
+
+🔹A.Primitive Variables : A variable which is created with primitive data types is called primitive data types .
+Example : int a=10 ;
+int is primitive data type .
+
+🔹B.Non Primitive Variable : A variable which is created with non primitive data tyeps is called non primitive variable .
+Example : String name :"Kohli"
+Here String is non primitive data types
+
+2.Based on scope and Visiblity
+There are three types:
+🔹 A. Local Variable
+Declared inside a method or block
+Only accessible inside that method
+Created when the method is called and destroyed when it ends
+
+public class LocalExample {
+    public void greet() {
+        String message = "Hello, I'm a local variable!";
+        System.out.println(message);
+    }
+
+    public void anotherMethod() {
+        // System.out.println(message); ❌ Error: message not accessible here
+    }
+}
+🔹B.1.Globle Non static Variable
+Declared inside a class but outside any method
+Belongs to the object (non-static)
+Can be accessed by all non-static methods in that class
+
+public class InstanceExample {
+    int age = 25; //Globle Variable
+
+    public void showAge() {
+        System.out.println("Age: " + age); // we can access non static variable direct in non static context but in static we required object to access those variable
+    }
+}
+🔹B.2.Globle Static Variable
+Declared inside a class with the static keyword
+Belongs to the class, not to objects
+Shared among all instances of the class
+
+public class StaticExample {
+    static String college = "ABC University"; // static variable
+
+    public void showCollege() {
+        System.out.println("College: " + college); // accessible any where because of the static member is accessable any where in class
+    }
+}
