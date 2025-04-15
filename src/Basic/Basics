@@ -1,0 +1,253 @@
+Install JDK on Windows – Quick Steps
+
+Download JDK
+ Go to: https://www.oracle.com/java/technologies/javase-downloads.html
+ → Download the Windows installer (e.g. JDK 21)
+
+Install JDK
+ → Run the installer
+ → Note the install path (e.g., C:\Program Files\Java\jdk-21)
+
+Set Environment Variables
+
+Search for Environment Variables in Start Menu
+
+Under System Variables:
+
+Click New →
+ Name: JAVA_HOME
+ Value: C:\Program Files\Java\jdk-21
+
+Edit Path → Click New → Add:
+ %JAVA_HOME%\bin
+
+GitHub Account Creation (Short Steps)
+
+Go to https://github.com
+
+Click Sign up
+
+Enter:
+
+Username
+
+Email
+
+Password
+
+Click Create account
+
+Verify your email (enter the code sent)
+
+Choose Free plan
+
+Done! 🎉
+
+GitHub Basics – Commands & Usage
+
+Command
+
+Usage
+
+git init
+
+Initialize a new Git repo in current folder
+
+git clone <url>
+
+Copy a GitHub repo to your local machine
+
+git add <file>
+
+Stage file(s) for commit
+
+git commit -m "msg"
+
+Save changes with a message
+
+git push
+
+Upload local commits to GitHub
+
+git pull
+
+Get latest changes from GitHub
+
+git branch
+
+List branches (or create with -b <name>)
+
+git merge <branch>
+
+Merge branch into current branch
+
+
+
+ Example Workflow:
+
+Git bash Commands
+
+git init
+git add .
+git commit -m "First commit"
+git branch -b main
+git remote add origin <repo-url>
+git push -u origin main
+
+
+
+IntelliJ IDEA Installation – Windows
+
+Download IntelliJ
+
+Go to: https://www.jetbrains.com/idea/download
+
+Choose the Community version (free)
+
+Click Download
+
+Run the Installer
+
+Open the .exe file
+
+Follow the setup wizard:
+
+Choose install location
+
+Select:
+
+64-bit launcher
+
+.java file association (optional)
+
+Complete Installation
+
+Click Install
+
+Once done, click Finish
+
+First Launch
+
+Open IntelliJ IDEA
+
+Choose a theme (light/dark)
+
+Skip or log in to JetBrains account (optional)
+
+Create a Java Project
+
+Click New Project
+
+Select Java → Set SDK (use installed JDK)
+
+Name your project and start coding!
+
+
+
+
+
+Step-by-Step: Connect GitHub to IntelliJ & Push Code
+
+1. Set Up Git in IntelliJ
+
+Open IntelliJ IDEA
+
+Go to: File > Settings > Version Control > Git
+
+Make sure Git is installed:
+
+Set path to Git: C:\Program Files\Git\bin\git.exe (usually auto-detected)
+
+Click Test to verify.
+
+
+
+2. Add Your GitHub Account
+
+Go to: File > Settings > Version Control > GitHub
+
+Click + to add account
+
+Choose Log in via GitHub
+
+Enter your GitHub username & password, or log in with browser/token.
+
+3. Share Project on GitHub
+
+Open your IntelliJ project
+
+Go to: VCS > Import into Version Control > Share Project on GitHub
+
+Enter:
+
+Repository Name
+
+Description (optional)
+
+Click Share
+
+
+
+4. Push Your Code to GitHub
+
+After sharing:
+
+Go to: VCS > Commit
+
+Select files to commit
+
+Write a commit message
+
+Click Commit
+
+Then: VCS > Git > Push
+
+Confirm the branch and remote
+
+Click Push
+
+
+
+You're Done!
+
+Your code is now on GitHub 🎉
+ Check it at: https://github.com/your-username/your-repo-name
+
+1. Structure of a Basic Java Program
+
+Here's a simple "Hello World" example:
+
+ public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, world!");
+    }
+}
+
+
+Explanation:
+
+public class HelloWorld: Defines a class named HelloWorld. In Java, everything happens inside classes.
+
+public static void main(String[] args): This is the main method, the starting point of any Java application.
+
+System.out.println("Hello, world!");: Prints text to the console.
+
+
+
+2. Java File Naming
+
+The file name should match the public class name.
+
+If your class is HelloWorld, the file should be HelloWorld.java.
+
+
+
+3. Basic Java Syntax Rules
+
+Case-sensitive: Hello and hello are different.
+
+Class names should start with an uppercase letter.
+
+Method names should start with a lowercase letter.
+
+Java statements end with a semicolon ;.
