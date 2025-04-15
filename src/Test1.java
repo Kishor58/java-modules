@@ -32,6 +32,7 @@ public class Test1 {
         System.out.println("Enter the a number which you want to square");
         int c=sc.nextInt();
         System.out.println("Square Of the Given Number :"+square(c));
+        System.out.println("Checking GitHub");
 
     }
 }
