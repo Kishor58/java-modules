@@ -1,0 +1,123 @@
+What is a Data Type?
+
+A data type tells the compiler or interpreter:
+
+1.What kind of data a variable can hold.
+
+2.How much memory to allocate.
+
+3.What operations can be performed on that data.
+
+*In simple terms: A data type defines what kind of value a variable can store.
+
+**Why Do We Need Data Types in Programming?
+
+1.To use memory efficiently
+
+Different data types take different amounts of memory.
+Example: int takes 4 bytes, but byte takes only 1 byte.
+If you're storing age (0–120), using int wastes memory—byte would be better.
+
+2.To avoid errors
+
+You shouldn't add a number to a string without a clear purpose. Data types prevent such misuse.
+Example: You can't do String name = 123; — that’s a type mismatch.
+
+3.To improve code clarity
+
+Data types act as documentation for what kind of data is being used.
+Example: boolean isLoggedIn = true; clearly tells you it holds a true/false value.
+
+4.To perform type-specific operations
+
+You can only perform arithmetic on numeric types, not on strings or booleans.
+Example: You can add two int values, but not a boolean and a float.
+
+
+
+* Without Data Types? What Happend ?
+
+Imagine a world where you write
+
+x = 5;
+x = "Hello";
+x = true;
+
+
+How would the compiler know:
+
+How much memory to allocate?
+What type of operation is allowed?
+What result to expect?
+
+Java says “Nope!” — it wants clarity. That's why you must declare:
+
+int x = 5;         // Integer
+String x = "Hello"; // String
+boolean x = true;  // Boolean
+
+There are two types of the data types
+
+1. Primitive Data Types in Java
+
+Primitive data types are the basic building blocks of data manipulation in Java. They are predefined by the language and store simple values.
+
+Types of Primitive Data Types:
+---------------------------------------------------------------------------------------
+Data Type          Size         Description                      Example
+---------------------------------------------------------------------------------------
+byte               1 byte       Small integer (-128 to 127)      byte a = 100;
+
+short              2 bytes      Larger than byte                 short b = 10000;
+
+int                4 bytes      Common integer type              int c = 123456;
+
+long               8 bytes      Very large integers              long d = 123456789L;
+
+float              4 bytes      Decimal numbers (less precise)   float e = 3.14f;
+
+double             8 bytes      More precise decimal numbers     double f = 3.14159;
+
+char               2 bytes      A single character (Unicode)     char g = 'A';
+
+boolean            1 bit        true or false                    boolean h = true;
+-------------------------------------------------------------------------------------------
+
+🔹 Characteristics:
+
+1.Fixed size
+
+2.Faster and more efficient
+
+3.Store actual values
+
+4.Cannot be null
+
+
+
+2. Non-Primitive Data Types in Java
+
+Non-primitive data types are also called reference types. They are used to store multiple values or complex objects.
+
+Examples of Non-Primitive Data Types:
+
+String – Sequence of characters
+ → String name = "Alice";
+
+Array – Collection of similar data types
+ → int[] numbers = {1, 2, 3};
+
+Class – Blueprint for objects
+ → class Car { ... }
+
+Interface, Enum – Used in OOP design
+
+🔹 Characteristics:
+
+Store reference (memory address) to the value
+
+Can be null
+
+More complex and customizable
+
+Can have methods
