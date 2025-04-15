@@ -1,0 +1,111 @@
+Tokens In Java
+
+In Java, tokens are the smallest elements of a program that are meaningful to the compiler. When you write code, the Java compiler breaks it down into individual tokens during the lexical analysis phase of compilation.
+
+Categories of Tokens in Java:
+
+Keywords
+
+Identifiers
+
+Literals
+
+Operators
+
+Separators (Punctuators)
+
+Comments (technically ignored by the compiler, but part of the lexical structure)
+
+1.Keywords
+
+Reserved words that have a special meaning in Java and cannot be used as identifiers (variable names, class names, etc.).
+
+Keywords we can use but we can not be change it .
+
+It always be in lowercase.
+
+Examples:
+
+int, class, if, else, while, for, return, static, public, private, class, do, private, default etc.
+
+
+
+2.Identifiers
+
+Names given to classes, variables, methods, etc. Must begin with a letter (A-Z or a-z), currency character ($), or an underscore (_), followed by any combination of letters, digits, $, or _.
+
+Rules for the Identifier :
+
+1.It should not be keywords, because we can not use keywords as an identifier.
+
+2.It should not be start with any number .
+
+3.In this we can not be use special character.
+
+
+
+Examples:
+
+myVar, StudentName, _count, $price
+
+
+
+
+3.Literals
+
+Constants used to represent fixed values.
+
+Types:
+
+Integer literals: 10, -42
+
+Floating-point literals: 3.14, -0.001
+
+Character literals: 'A', '\n'
+
+String literals: "Hello", "Java"
+
+Boolean literals: true, false
+
+Null literal: null
+
+4.Separators (Punctuators)
+
+Symbols used to separate code components.
+
+Examples:
+
+()  {}  []  ;  , .  ::
+
+
+
+
+5.Comments (Not tokens, but part of code structure)
+
+Used to explain code; ignored by the compiler.
+
+// single-line comment
+/* multi-line comment */
+/** Javadoc comment */
+
+
+
+
+Example Code Breakdown:
+
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+}
+
+
+Tokens in this example:
+
+public, class, static, void → Keywords
+
+HelloWorld, main, args, System, out, println → Identifiers
+
+"Hello, World!" → Literal (String)
+
+{, }, (, ), ;, . → Separators/Operators
