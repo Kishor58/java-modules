@@ -75,6 +75,22 @@ public class CollectionMethods {
         Object[] arr=collection.toArray();
         System.out.println("Iteration using toArray Method :"+Arrays.toString(arr));
 
+//        14.stream()
+        System.out.println("Using stream :");
+        collection.stream().forEach(System.out::print);
+        System.out.println();
+
+//        15.parallelStream()
+        System.out.println("parallelStream :");
+        collection.parallelStream().forEach(System.out::print);
+        System.out.println();
+
+//        16.spliterator()
+        System.out.print("Using spliterator: ");
+        Spliterator<String> spliterator = collection.spliterator();
+        spliterator.forEachRemaining(System.out::print);  // BananaFig
+        System.out.println();
+
 
 
 

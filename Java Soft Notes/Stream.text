@@ -1,0 +1,18 @@
+Collectin  : If we want to represent a group of the objects as single entity then we should go for the collection .
+
+Stream : if we want to process of the objects from the collection-stream or array
+                                    or
+        A Stream is a sequence of elements that supports various operations to process data. It's not a data structure—it doesn't store data—it just pulls data from a source (like a collection or array) and applies operations.
+
+Key Features of Streams:
+
+1.Doesn't modify the original collection
+
+2.Lazy (calculates only when needed)
+
+3.Can chain multiple operations (filter, map, sort, etc.)
+
+4.Can be sequential or parallel
+
+
+
