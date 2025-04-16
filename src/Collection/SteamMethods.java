@@ -53,10 +53,10 @@ public class SteamMethods {
 
         System.out.println("Current Salary Of Employee :");
         System.out.println(sal);
-        List<Double> uddateSal=sal.stream().map(i->i+1000.0).collect(Collectors.toList());
+        List<Double> updateSal=sal.stream().map(i->i+1000.0).collect(Collectors.toList());
 
         System.out.println("Updated Salary's Of Employee :");
-        System.out.println(uddateSal);
+        System.out.println(updateSal);
 
     }
 }
