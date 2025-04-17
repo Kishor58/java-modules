@@ -1,0 +1,201 @@
+Collections : Collections is group of the individual objects .which have same additional functionality that we can use in our program
+
+we have some inbuild methods of collection that we use to perform operations :
+
+
+Method	                            Description
+add(E e)	                        Adds the specified element to the collection. Returns true if added.
+addAll(Collection<? extends E> c)	Adds all elements from another collection to this collection.
+clear()	                            Removes all elements from the collection.
+contains(Object o)	                Returns true if the collection contains the specified element.
+containsAll(Collection<?> c)	    Returns true if this collection contains all elements from the specified collection.
+equals(Object o)	                Compares this collection with another object for equality.
+isEmpty()	                        Returns true if the collection has no elements.
+iterator()	                        Returns an Iterator to loop over the elements one by one.
+remove(Object o)	                Removes a single instance of the specified element, if it exists.
+removeAll(Collection<?> c)	        Removes all elements that are also in the given collection.
+retainAll(Collection<?> c)	        Keeps only the elements that are also in the given collection (intersection).
+size()	                            Returns the number of elements in the collection.
+toArray()	                        Converts the collection to an array.
+toArray(T[] a)	                    Converts the collection to a typed array (e.g., String[], Integer[]).
+stream()	                        Returns a sequential stream for processing elements (since Java 8).
+parallelStream()	                Returns a parallel stream for multi-threaded processing (since Java 8).
+spliterator()	                    Creates a Spliterator for parallel processing (advanced use).
+
+In collection we have three child interfaces :
+1.list interface
+2.set interface
+3.Queue interface
+
+### 1.List
+
+A `List` is a collection where:
+
+- Order matters — it maintains the **insertion order**.
+- Duplicates are allowed— you can have the same element multiple times.
+- You can access elements by index** like `list.get(0)`.
+- Examples: `ArrayList`, `LinkedList`, `Vector`
+
+### When to use:
+- When you need an **ordered collection**.
+- When you care about **position/index** (like storing items in a cart).
+- When **duplicates are okay** (like a playlist with the same song twice).
+
+####Example:
+List<String> list = new ArrayList<>();
+list.add("A");
+list.add("B");
+list.add("A");  // Allowed
+System.out.println(list); // [A, B, A]
+
+
+### 2. Set
+
+A `Set` is a collection that:
+
+- Does NOT allow duplicates** — every element must be unique.
+- Order may or may not matter**, depending on the type:
+  - `HashSet`: No order
+  - `LinkedHashSet`: Maintains insertion order
+  - `TreeSet`: Maintains sorted order
+
+#### When to use:
+- When you need to remove duplicates automatically.
+- When the position/index doesn't matter.
+- When you want to test for membership (like checking if an item exists in a collection).
+
+#### Example:
+
+Set<String> set = new HashSet<>();
+set.add("A");
+set.add("B");
+set.add("A");  // Duplicate, ignored
+System.out.println(set); // [A, B] or [B, A] (no order guaranteed)
+
+
+### 3. Queue
+
+A `Queue` is a collection used for **processing elements in a specific order**, often **First In First Out (FIFO)**.
+
+- Think of it like a line at a ticket counter** — first one in gets served first.
+- **Duplicates are allowed
+- You usually use `.add()` to insert, and `.poll()` or `.remove()` to take from the front.
+- Types include: `LinkedList`, `PriorityQueue`, `ArrayDeque`
+
+-->When to use:
+- When you want to **process elements in order**, like in messaging systems, printers, or task scheduling.
+- When elements must be handled **sequentially**.
+
+Example:
+Queue<String> queue = new LinkedList<>();
+queue.add("Task1");
+queue.add("Task2");
+queue.add("Task3");
+
+System.out.println(queue.poll()); // Task1 (removed)
+System.out.println(queue);        // [Task2, Task3]
+
+----------------------------------------------------------------------------------------
+Absolutely! Let's explain the **differences** between **ArrayList**, **LinkedList**, **Vector**, and **Stack** — in a way that's easy to remember and understand, especially with the same kind of example you just saw. No tables, just clear points one by one. 👇
+
+---
+
+## 🔹 1. ArrayList
+
+### What it is:
+- A **resizable array** that stores elements in **insertion order**.
+- Allows **duplicate elements**.
+- **Not synchronized** (not thread-safe).
+
+### Best For:
+- When you mostly need to **access data by index** (e.g. `get(0)`, `get(2)`).
+- When you want a **fast, growable list** and don’t care about thread safety.
+
+### Performance:
+- Fast for reading/getting by index.
+- Slower when inserting or deleting in the middle of the list (because elements need to be shifted).
+
+---
+
+## 🔹 2. LinkedList
+
+###  What it is:
+- A **doubly linked list**.
+- Maintains insertion order and allows duplicates.
+- Can be used as both a list and a queue (supports `addFirst()`, `addLast()`, etc.)
+
+### Best For:
+- When you frequently insert or remove elements from the beginning or middle.
+- When you don’t need fast random access.
+
+### Performance:
+- Faster than ArrayList when adding/removing from the beginning.
+- Slower than ArrayList for accessing elements by index (`get(i)`), because it must traverse the list.
+
+---
+
+## 🔹 3. Vector
+
+###  What it is:
+- Almost the same as ArrayList, but it's thread-safe.
+- Every method is synchronized, which means it's safe to use in multi-threaded environments.
+
+### Best For:
+- Legacy applications or when you need a **thread-safe ArrayList**.
+- Otherwise, it's mostly replaced by modern alternatives like `ArrayList` + manual synchronization.
+
+### Performance:
+- Slower than ArrayList due to synchronization overhead.
+- But safe for multiple threads accessing the list at the same time.
+
+---
+
+## 🔹 4. Stack
+
+### What it is:
+- A subclass of Vector that implements a Last-In-First-Out (LIFO) structure.
+- Think of it like a stack of plates — last plate added is the first to be removed.
+
+### Best For:
+- Undo operations, backtracking, browser history, reversing things, etc.
+- Use `.push()` to add, `.pop()` to remove the last.
+
+### Performance:
+- Thread-safe (inherits from Vector).
+- Only use when you need **LIFO** behavior.
+
+_________________________________________________________________________________________
+Differences between `HashSet`, `TreeSet`, and `LinkedHashSet` in Java:
+
+---
+
+### 1. HashSet
+- **Order**: No order (random order).
+- **Duplicates**: Does not allow duplicates.
+- **Performance**: Fastest for basic operations (add, remove, contains).
+- **Implementation**: Uses a **hash table** for storage.
+- **Nulls**: Allows **one null** value.
+- **Use case**: Best when you need unique elements and **don’t care about order**.
+
+---
+
+### 2.LinkedHashSet
+- **Order**: Maintains **insertion order** (the order in which elements were added).
+- **Duplicates**: Does not allow duplicates.
+- **Performance**: Slightly slower than `HashSet` due to additional overhead of maintaining order.
+- **Implementation**: Uses a **hash table + linked list** to maintain order.
+- **Nulls**: Allows **one null** value.
+- **Use case**: Best when you need unique elements and want to preserve **insertion order**.
+
+---
+
+### 3.TreeSet
+- **Order**: Elements are stored in **sorted order** (natural ordering or custom comparator).
+- **Duplicates**: Does not allow duplicates.
+- **Performance**: Slower than `HashSet` and `LinkedHashSet` for basic operations, as it needs to maintain sorting.
+- **Implementation**: Uses a **Red-Black tree**.
+- **Nulls**: **Does not allow null** values (throws `NullPointerException` for null elements).
+- **Use case**: Best when you need unique elements and want them to be **sorted**.
+
+
+

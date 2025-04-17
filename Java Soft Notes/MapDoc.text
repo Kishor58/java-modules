@@ -1,0 +1,366 @@
+Map in Java
+------------
+A Map is an object that stores key-value pairs, where each key is unique, and each key maps to exactly one value. In other words, a map is like a dictionary: you provide a key, and it returns the associated value.
+
+Key Characteristics of Maps:
+
+1.Key-Value Pair: A Map stores data in the form of a pair: key → value.
+2.Unique Keys: Every key in a Map must be unique. If you insert a new entry with an existing key, the new value will overwrite the old one.
+3.Null Values: A Map can have null values but usually only one null key (depending on the specific implementation).
+
+Common Implementations of Map:
+There are several implementations of the Map interface in Java:
+
+1.HashMap
+2.TreeMap
+3.LinkedHashMap
+4.Hashtable (Legacy)
+
+1. HashMap
+->Order: No guaranteed order of keys (it does not maintain the insertion order or sort them).
+
+->Duplicates: Allows only unique keys; values can be duplicated.
+
+->Performance: Fastest in general operations like put(), get(), and remove(), as it uses a hash table for storage.
+
+->Nulls: Allows one null key and multiple null values.
+
+->Thread Safety: Not thread-safe (not synchronized).
+
+Example:
+
+import java.util.HashMap;
+
+public class HashMapExample {
+    public static void main(String[] args) {
+        HashMap<String, Integer> map = new HashMap<>();
+        map.put("Apple", 10);
+        map.put("Banana", 5);
+        map.put("Mango", 8);
+
+        System.out.println(map); // No specific order
+    }
+}
+
+2. TreeMap
+->Order: Sorted order of keys (based on natural ordering or a custom comparator).
+
+->Duplicates: Allows only unique keys; values can be duplicated.
+
+->Performance: Slower than HashMap for basic operations due to the need to maintain sorting (uses a Red-Black tree).
+
+->Nulls: Does not allow null keys (throws NullPointerException) but allows null values.
+
+->Thread Safety: Not thread-safe.
+
+Example:
+
+import java.util.TreeMap;
+
+public class TreeMapExample {
+    public static void main(String[] args) {
+        TreeMap<String, Integer> map = new TreeMap<>();
+        map.put("Banana", 5);
+        map.put("Mango", 8);
+        map.put("Apple", 10);
+
+        System.out.println(map); // Sorted order of keys (alphabetical)
+    }
+}
+3. LinkedHashMap
+->Order: Maintains insertion order of keys (the order in which they were added to the map).
+
+->Duplicates: Allows only unique keys; values can be duplicated.
+
+->Performance: Slightly slower than HashMap due to the need to maintain the order of insertion.
+
+->Nulls: Allows one null key and multiple null values.
+
+->Thread Safety: Not thread-safe.
+
+Example:
+
+import java.util.LinkedHashMap;
+
+public class LinkedHashMapExample {
+    public static void main(String[] args) {
+        LinkedHashMap<String, Integer> map = new LinkedHashMap<>();
+        map.put("Apple", 10);
+        map.put("Banana", 5);
+        map.put("Mango", 8);
+
+        System.out.println(map); // Insertion order
+    }
+}
+4. Hashtable (Legacy)
+->Order: No guaranteed order (like HashMap).
+
+->Duplicates: Allows only unique keys; values can be duplicated.
+
+->Performance: Slower than HashMap due to synchronization overhead.
+
+->Nulls: Does not allow null keys or values.
+
+->Thread Safety: Thread-safe (synchronized).
+
+Example:
+
+import java.util.Hashtable;
+
+public class HashtableExample {
+    public static void main(String[] args) {
+        Hashtable<String, Integer> map = new Hashtable<>();
+        map.put("Apple", 10);
+        map.put("Banana", 5);
+        map.put("Mango", 8);
+
+        System.out.println(map); // No specific order
+    }
+}
+---------------------------------------------------------------------------------
+Map Methods Basic to Adavance
+
+### 1. put(K key, V value)
+- What it does: Adds a new key-value pair to the map. If the key already exists, it **updates** the value.
+- **Example**:
+  map.put("Apple", 10);  // Adds "Apple" with value 10
+  map.put("Banana", 5);   // Adds "Banana" with value 5
+  map.put("Apple", 15);   // Updates "Apple" to 15
+  ```
+
+### 2.get(Object key)
+- **What it does**: Returns the value associated with the given key. If the key doesn't exist, it returns `null`.
+- Example:
+  System.out.println(map.get("Apple"));  // Prints 15 (the value of "Apple")
+  ```
+
+### 3.remove(Object key)
+- **What it does**: Removes the key-value pair for the specified key.
+- **Example**:
+  map.remove("Apple");  // Removes "Apple" from the map
+  ```
+
+### 4.containsKey(Object key)
+- **What it does**: Checks if the map contains the specified key. Returns `true` if the key exists, otherwise `false`.
+- **Example**:
+  System.out.println(map.containsKey("Apple"));  // Returns false (since Apple was removed)
+
+
+### 5.containsValue(Object value)
+- **What it does**: Checks if the map contains a **value**, not a key. Returns `true` if the value exists, otherwise `false`.
+- **Example**:
+
+  System.out.println(map.containsValue(15));  // Returns true (if 15 is in the map)
+
+
+### 6.size()
+- **What it does**: Returns the number of key-value pairs in the map.
+- **Example**:
+
+  System.out.println(map.size());  // Returns 2 (since there are 2 key-value pairs)
+
+
+### 7.isEmpty()
+- **What it does**: Checks if the map is empty. Returns `true` if there are no key-value pairs, otherwise `false`.
+- **Example**:
+
+  System.out.println(map.isEmpty());  // Returns false (because the map is not empty)
+
+
+### 8.clear()
+- **What it does**: Removes all key-value pairs from the map.
+- **Example**:
+
+  map.clear();  // Clears all entries from the map
+  System.out.println(map.isEmpty());  // Returns true (since the map is now empty)
+  ```
+
+### 9.keySet()
+- **What it does**: Returns a **Set** of all the keys in the map.
+- **Example**:
+
+  System.out.println(map.keySet());  // Prints the keys, e.g., [Apple, Banana]
+
+
+### 10.values()
+- **What it does**: Returns a **Collection** of all the values in the map.
+- **Example**:
+
+  System.out.println(map.values());  // Prints the values, e.g., [10, 5]
+
+
+### 11.entrySet()
+- **What it does**: Returns a **Set** of key-value pairs in the map.
+- **Example**:
+
+  System.out.println(map.entrySet());  // Prints key-value pairs, e.g., [Apple=10, Banana=5]
+
+
+### 12.putAll(Map<? extends K, ? extends V> m)
+- **What it does**: Adds all key-value pairs from another map to the current map.
+- **Example**:
+
+  Map<String, Integer> newMap = new HashMap<>();
+  newMap.put("Orange", 12);
+  map.putAll(newMap);  // Adds all key-value pairs from newMap to the map
+
+
+### 13. forEach(BiConsumer<? super K, ? super V> action)
+- **What it does**: Performs a given action (like printing) on each key-value pair in the map.
+- **Example**:
+
+  map.forEach((key, value) -> System.out.println(key + ": " + value));
+
+
+### 14.replace(K key, V value)
+- **What it does**: Replaces the value of a key if it already exists.
+- **Example**:
+
+  map.replace("Apple", 20);  // Changes the value of "Apple" to 20
+  ```
+
+### 15.replace(K key, V oldValue, V newValue)
+- **What it does**: Replaces the value only if the current value matches the old value.
+- **Example**:
+
+  map.replace("Apple", 20, 25);  // Replaces value of "Apple" from 20 to 25
+
+
+### 16. putIfAbsent(K key, V value)
+- **What it does**: Adds the key-value pair **only if the key doesn't already exist** in the map.
+- **Example**:
+
+  map.putIfAbsent("Banana", 7);  // Will not change value of "Banana" if it exists
+
+
+### 17. **`compute(K key, BiFunction<? super K, ? super V, ? extends V> remappingFunction)`**
+- **What it does**: Computes a new value for a key, based on its current value (or `null` if the key doesn't exist).
+- **Example**:
+
+  map.compute("Apple", (k, v) -> v == null ? 5 : v + 5);  // Adds 5 to the value of "Apple"
+
+
+### 18 computeIfAbsent(K key, Function<? super K, ? extends V> mappingFunction)
+- **What it does**: Computes a value for the key if it **doesn't already exist**.
+- **Example**:
+
+  map.computeIfAbsent("Peach", k -> 3);  // Adds "Peach" with value 3 if it doesn't exist
+  ```
+
+### 19computeIfPresent(K key, BiFunction<? super K, ? super V, ? extends V> remappingFunction)
+- **What it does**: Computes a new value for the key **only if the key exists**.
+- **Example**:
+
+  map.computeIfPresent("Apple", (k, v) -> v + 5);  // Adds 5 to value of "Apple"
+  ```
+
+### 20. merge(K key, V value, BiFunction<? super V, ? super V, ? extends V> remappingFunction)
+- **What it does**: Merges a new value with the existing value for a key using the provided function.
+- Example:
+
+  map.merge("Apple", 10, (oldValue, newValue) -> oldValue + newValue);  // Adds 10 to the value of "Apple"
+  ```
+
+### 21.toString()
+- What it does: Returns a string representation of the map, including all key-value pairs.
+- Example:
+
+  System.out.println(map.toString());  // Prints the map as a string, e.g., {Apple=25, Banana=5}
+
+
+------------------------------------------------------------------------------------------------------------------
+
+Adavance Methods in Map :
+
+Let’s take a deeper look at **advanced methods** in the **Map** interface that allow you to **remove or update entries based on certain conditions**. These methods help you handle more complex scenarios compared to the basic methods like `put()`, `get()`, and `remove()`.
+
+### 1. remove(Object key, Object value)
+
+   - **What it does**:
+     -Removes the entry for the specified key **only if** it is currently mapped to the specified value.
+     - This means that **both the key and the value** must match for the entry to be removed.
+     - If the key exists but has a different value, it will **not be removed**.
+   - **Example**:
+
+     Map<String, Integer> map = new HashMap<>();
+     map.put("Apple", 10);
+     map.put("Banana", 5);
+     map.put("Orange", 15);
+
+     // Removing "Apple" only if its value is 10
+     map.remove("Apple", 10);  // Returns true, and removes "Apple=10"
+     map.remove("Banana", 7);  // Returns false, does not remove "Banana" because value doesn't match
+
+     System.out.println(map);  // Output: {Banana=5, Orange=15}
+------
+
+### 2. compute(K key, BiFunction<? super K, ? super V, ? extends V> remappingFunction)
+
+   - **What it does**:
+     -Computes a new value for a given key, based on its current value (if the key exists) or `null` (if the key does not exist).
+     - If the key **exists**, it applies the provided function on the current value.
+     - If the key **does not exist**, it can optionally create a new value, depending on the function.
+   - **Example**:
+
+     Map<String, Integer> map = new HashMap<>();
+     map.put("Apple", 10);
+     map.put("Banana", 5);
+
+     // Computing a new value for the key "Apple"
+     map.compute("Apple", (k, v) -> v == null ? 1 : v + 5);  // If "Apple" exists, it adds 5 to its value
+     map.compute("Peach", (k, v) -> 3);  // "Peach" does not exist, so it creates the key with value 3
+
+     System.out.println(map);  // Output: {Apple=15, Banana=5, Peach=3}
+--------
+
+### 3.computeIfAbsent(K key, Function<? super K, ? extends V> mappingFunction)
+
+   - **What it does**:
+     - Computes a value for the specified key **only if** the key is not already associated with a value.
+     - If the key exists in the map, it **does nothing**.
+     - If the key is **absent**, it applies the given `mappingFunction` to compute and add the value for that key.
+   - **Example**:
+
+     Map<String, Integer> map = new HashMap<>();
+     map.put("Apple", 10);
+
+     // "Apple" is already present, so value won't be changed
+     map.computeIfAbsent("Apple", k -> 100);  // Does nothing because "Apple" exists
+     map.computeIfAbsent("Orange", k -> 20); // Computes and adds "Orange" with value 20
+
+     System.out.println(map);  // Output: {Apple=10, Orange=20}
+ -------
+
+### 4.computeIfPresent(K key, BiFunction<? super K, ? super V, ? extends V> remappingFunction)
+   - **What it does**: Computes a new value for the specified key **only if the key exists**.
+     - If the key is **present**, it applies the `remappingFunction` to the current value of the key.
+     - If the key is **not present**, it does **nothing**.
+   - **Example**:
+     ```java
+     Map<String, Integer> map = new HashMap<>();
+     map.put("Apple", 10);
+
+     // "Apple" exists, so its value will be updated
+     map.computeIfPresent("Apple", (k, v) -> v + 5);  // "Apple" value becomes 15
+     map.computeIfPresent("Banana", (k, v) -> v + 2); // Does nothing because "Banana" doesn't exist
+
+     System.out.println(map);  // Output: {Apple=15}
+ --------
+
+### 5. merge(K key, V value, BiFunction<? super V, ? super V, ? extends V> remappingFunction)
+
+   - **What it does**:
+     -Merges a new value with the existing value for a given key using the provided remapping function.
+     - If the key is **absent**, it adds the key with the provided value.
+     - If the key is **present**, it merges the existing value with the new value using the given `remappingFunction`.
+     - This is a powerful method for **combining** or **merging** values when keys are present.
+   - **Example**:
+
+     Map<String, Integer> map = new HashMap<>();
+     map.put("Apple", 10);
+
+     // Merging values for "Apple"
+     map.merge("Apple", 5, (oldValue, newValue) -> oldValue + newValue);  // Merges by adding old and new values
+     map.merge("Banana", 3, (oldValue, newValue) -> oldValue + newValue);  // Adds "Banana" with value 3
+
+     System.out.println(map);  // Output: {Apple=15, Banana=3}
