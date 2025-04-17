@@ -1,0 +1,106 @@
+1. Regular Class
+A regular class is the most common and basic type of class in Java. It can have fields, methods, and constructors, and you can create multiple instances of it.
+
+Real-World Example:
+Imagine you are developing a car rental system. You could define a Car class to represent the cars in the rental service.
+
+class Car {
+    String model;
+    int year;
+    double rentalPrice;
+
+    public Car(String model, int year, double rentalPrice) {
+        this.model = model;
+        this.year = year;
+        this.rentalPrice = rentalPrice;
+    }
+
+    void start() {
+        System.out.println("The car " + model + " is starting...");
+    }
+
+    void stop() {
+        System.out.println("The car " + model + " has stopped.");
+    }
+}
+
+public class CarRental {
+    public static void main(String[] args) {
+        Car car1 = new Car("Toyota Corolla", 2020, 100.0);
+        car1.start();
+    }
+}
+Explanation: Here, the Car class is a regular class that stores car details and provides methods to start and stop the car.
+
+------------
+
+2. Abstract Class
+An abstract class is a class that cannot be instantiated on its own. It can have abstract methods (methods with no implementation) that must be implemented by its subclasses.
+
+Real-World Example:
+In a payment system, you may define an abstract class for different payment methods (Credit, PayPal, etc.).
+
+java
+Copy
+Edit
+abstract class Payment {
+    abstract void makePayment(double amount);
+
+    void showTransactionDetails(double amount) {
+        System.out.println("Transaction of $" + amount + " was successful.");
+    }
+}
+
+class CreditCardPayment extends Payment {
+    void makePayment(double amount) {
+        System.out.println("Payment of $" + amount + " made using Credit Card.");
+    }
+}
+
+public class PaymentTest {
+    public static void main(String[] args) {
+        Payment payment = new CreditCardPayment();
+        payment.makePayment(200.0);
+        payment.showTransactionDetails(200.0);
+    }
+}
+Explanation: The abstract class Payment defines a general blueprint for payment methods, while CreditCardPayment implements the abstract method makePayment.
+
+-----------
+3. Interface
+An interface defines a contract that a class must adhere to. It can only declare methods, not implement them.
+
+Real-World Example:
+In a vehicle management system, different vehicles can implement an Engine interface to define the start method.
+
+java
+Copy
+Edit
+interface Engine {
+    void startEngine();
+}
+
+class Car implements Engine {
+    public void startEngine() {
+        System.out.println("Car engine started.");
+    }
+}
+
+class Motorcycle implements Engine {
+    public void startEngine() {
+        System.out.println("Motorcycle engine started.");
+    }
+}
+
+public class VehicleTest {
+    public static void main(String[] args) {
+        Engine car = new Car();
+        Engine motorcycle = new Motorcycle();
+
+        car.startEngine();
+        motorcycle.startEngine();
+    }
+}
+Explanation: The Engine interface enforces that any class implementing it must define the startEngine method. Both Car and Motorcycle implement this method.
+
+-------------
