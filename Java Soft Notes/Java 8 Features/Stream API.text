@@ -1,0 +1,393 @@
+What is the Stream API?
+The Stream API in Java 8 provides a functional-style way to process sequences
+of elements (like collections) in a declarative, lazy, and parallelizable manner.
+
+
+Types Of Methods in Stream API
+
+1. filter(Predicate)
+Use: To keep only elements that match a condition.
+
+List<String> names = Arrays.asList("John", "Jane", "Tom", "Jake");
+
+List<String> filtered = names.stream()
+    .filter(name -> name.startsWith("J"))
+    .collect(Collectors.toList());
+
+System.out.println(filtered); // [John, Jane, Jake]
+
+Explanation:
+We want only names that start with "J". filter() takes a condition (a Predicate) and removes everything that doesn't match.
+
+Real Use Case:
+Filter users who are active, products that are in stock, or employees above age 30.
+
+🔹 2. map(Function)
+Use: To transform data — convert or modify each element.
+
+List<String> names = Arrays.asList("john", "jane", "tom");
+
+List<String> upper = names.stream()
+    .map(String::toUpperCase)
+    .collect(Collectors.toList());
+
+System.out.println(upper); // [JOHN, JANE, TOM]
+Explanation:
+map() is like "convert". It takes each item and changes it — here, it turns all names into UPPERCASE.
+
+Real Use Case:
+Convert product prices to another currency, change usernames to lowercase, or extract just names from a list of User objects.
+
+🔹 3. flatMap(Function)
+Use: To flatten nested structures (like lists inside lists).
+java
+Copy
+Edit
+List<List<String>> nested = Arrays.asList(
+    Arrays.asList("a", "b"),
+    Arrays.asList("c", "d")
+);
+
+List<String> flat = nested.stream()
+    .flatMap(List::stream)
+    .collect(Collectors.toList());
+
+System.out.println(flat); // [a, b, c, d]
+Explanation:
+Imagine a box inside a box — flatMap() opens them all into a single stream.
+
+Real Use Case:
+You have a list of orders, and each order has multiple items. Use flatMap() to get all items in one list.
+
+🔹 4. sorted()
+Use: To sort the stream's elements.
+
+List<String> names = Arrays.asList("Tom", "Jerry", "Anna");
+
+List<String> sorted = names.stream()
+    .sorted()
+    .collect(Collectors.toList());
+
+System.out.println(sorted); // [Anna, Jerry, Tom]
+Explanation:
+Sorts the elements in natural order (alphabetical for strings, ascending for numbers). You can also provide a custom comparator.
+
+Real Use Case:
+Sort products by price, employees by name, or scores by highest first.
+
+🔹 5. distinct()
+Use: To remove duplicate values.
+
+List<Integer> numbers = Arrays.asList(1, 2, 2, 3, 3, 3);
+
+List<Integer> unique = numbers.stream()
+    .distinct()
+    .collect(Collectors.toList());
+
+System.out.println(unique); // [1, 2, 3]
+Explanation:
+distinct() only keeps unique values, like using Set.
+
+Real Use Case:
+Remove duplicate entries from a contact list or avoid duplicate usernames.
+
+🔹 6. limit(n) & skip(n)
+Use: To paginate or limit data.
+
+List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+
+List<Integer> limited = numbers.stream().limit(3).collect(Collectors.toList()); // [1, 2, 3]
+List<Integer> skipped = numbers.stream().skip(3).collect(Collectors.toList());  // [4, 5, 6]
+Explanation:
+
+limit(n) gets the first n items
+
+skip(n) skips the first n items
+
+Real Use Case:
+Display only 10 results per page (pagination), or show only the top 5 best-selling products.
+
+🔹 7. peek()
+Use: To debug or inspect values during the stream flow.
+
+List<String> result = Arrays.asList("one", "two", "three").stream()
+    .peek(System.out::println)
+    .map(String::toUpperCase)
+    .collect(Collectors.toList());
+Explanation:
+peek() lets you see values inside the stream for logging/debugging before or after changes.
+
+Real Use Case:
+Debug a stream pipeline to see what data is being processed or where an issue is happening.
+
+🔹 8. collect()
+Use: To collect the final result into a collection like List, Set, Map.
+
+List<String> names = Arrays.asList("Tom", "Jerry");
+
+List<String> collected = names.stream()
+    .map(String::toUpperCase)
+    .collect(Collectors.toList());
+
+System.out.println(collected); // [TOM, JERRY]
+Explanation:
+Without collect(), nothing happens. It's the final step that ends the stream and gives you results.
+
+Real Use Case:
+Collect results from a search, transformation, or filter into a final list or map.
+
+🔹 9. reduce()
+Use: To combine all elements into one — like a sum, total, or single string.
+
+List<Integer> numbers = Arrays.asList(1, 2, 3, 4);
+
+int sum = numbers.stream()
+    .reduce(0, Integer::sum);
+
+System.out.println(sum); // 10
+Explanation:
+Think of reduce as adding everything together (but it can do more — like multiplying, joining strings, etc.)
+
+Real Use Case:
+Get total price, total marks, or create a single sentence from many words.
+
+🔹 10. forEach()
+Use: To perform an action like printing or updating — does not return anything.
+
+List<String> names = Arrays.asList("A", "B", "C");
+
+names.stream().forEach(System.out::println);
+Explanation:
+forEach() is for side-effects — use it when you're not collecting results but doing something (like saving or printing).
+
+Real Use Case:
+Print report lines, send notifications, or log events.
+
+🔹 11. anyMatch(), allMatch(), noneMatch()
+ Use: To check conditions across all or some elements.
+
+List<Integer> numbers = Arrays.asList(2, 4, 6);
+
+boolean anyOdd = numbers.stream().anyMatch(n -> n % 2 != 0); // false
+boolean allEven = numbers.stream().allMatch(n -> n % 2 == 0); // true
+Explanation:
+
+anyMatch() – is at least one element matching?
+
+allMatch() – do all elements match?
+
+noneMatch() – do none match?
+
+Real Use Case:
+Check if any product is out of stock, if all users verified their email, or if no orders are canceled.
+
+🔹 12. findFirst() / findAny()
+Use: To get one result (wrapped in Optional).
+
+Optional<String> name = Arrays.asList("Alice", "Bob", "Charlie").stream()
+    .filter(n -> n.startsWith("B"))
+    .findFirst();
+
+name.ifPresent(System.out::println); // Bob
+Explanation:
+
+findFirst() = first match
+
+findAny() = any match (especially useful in parallel streams)
+
+Real Use Case:
+Get the first product over a certain price, or find any available technician.
+
+🔹 13. groupingBy()
+Use: To group elements based on a property.
+
+List<String> names = Arrays.asList("Tom", "Tim", "Ann", "Ally");
+
+Map<Character, List<String>> grouped = names.stream()
+    .collect(Collectors.groupingBy(name -> name.charAt(0)));
+
+System.out.println(grouped);
+// {A=[Ann, Ally], T=[Tom, Tim]}
+Explanation:
+Groups names by first letter. Result is a map where the key is the group and value is list of items.
+
+Real Use Case:
+Group employees by department, students by grade, products by category.
+
+🔹 14. partitioningBy()
+Use: To split into 2 groups (true/false) based on a condition.
+
+List<Integer> numbers = Arrays.asList(5, 10, 15, 20);
+
+Map<Boolean, List<Integer
+
+
+******************************************************************************************
+
+Concept	Where Used
+List, Set, Map	To store menu, order, and maps
+filter()	     To remove invalid items
+map()	         To get MenuItem from names
+collect()	     To convert Stream to Set, List, Map
+toMap()	         Menu and price maps
+groupingBy()	 Grouping items by category
+sorted()	     Sort by price
+mapToDouble()	Calculate sum of prices
+forEach()	    Print each item
+Optional        (optional in enhancement)	Can be used for safe lookup in map
+
+*******************************************************************************************
+Core Components of Stream API
+Streams: A stream is a sequence of elements that supports sequential and parallel aggregate operations.
+
+Streams don't store data. They simply convey elements from a data structure or I/O source.
+
+Stream Operations:
+
+Intermediate Operations: These return a new stream and are lazy (they are only executed when a terminal operation is invoked). Examples:
+
+filter(): Filters elements based on a condition.
+
+map(): Transforms each element.
+
+sorted(): Sorts elements.
+
+distinct(): Removes duplicates.
+
+Terminal Operations: These produce a result or a side-effect and terminate the stream pipeline. Examples:
+
+collect(): Collects the result into a collection.
+
+forEach(): Applies a consumer to each element.
+
+reduce(): Combines elements into a single result.
+
+count(): Counts the number of elements in the stream.
+
+anyMatch(), allMatch(), noneMatch(): Tests whether a condition is met.
+
+**********************************************************************************************************
+
+1. collect(): Collects the result into a collection.
+The collect() method is a terminal operation in the Stream API that transforms the elements of a stream into a different form, typically a collection like a List, Set, Map, or some other custom data structure. It is used to gather the elements of the stream after processing them with intermediate operations (e.g., map(), filter()).
+
+The collect() method takes a Collector as an argument, which is a utility class provided in the java.util.stream.Collectors package.
+
+Common Collectors:
+Collectors.toList(): Collects the elements into a List.
+
+Collectors.toSet(): Collects the elements into a Set.
+
+Collectors.toMap(): Collects the elements into a Map.
+
+Collectors.joining(): Joins the elements into a single String.
+
+Collectors.groupingBy(): Groups the elements by some criteria.
+
+Collectors.summarizingInt(): Collects statistics like count, sum, min, average, and max.
+
+Example:
+
+List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+
+List<Integer> squaredNumbers = numbers.stream()
+                                      .map(n -> n * n)
+                                      .collect(Collectors.toList());  // Collecting into a List
+
+System.out.println(squaredNumbers);  // Output: [1, 4, 9, 16, 25]
+
+
+2. forEach(): Applies a consumer to each element.
+The forEach() method is a terminal operation that performs an action for each element in the stream. The action is defined by a Consumer function (which takes an argument and returns nothing). It’s useful for performing side-effects, such as printing, logging, or modifying an external variable.
+
+It is important to note that forEach() is mainly used for side-effect operations. It doesn’t return any result.
+
+Example:
+List<String> names = Arrays.asList("Alice", "Bob", "Charlie");
+
+names.stream()
+     .forEach(name -> System.out.println("Hello, " + name));  // Prints: Hello, Alice Hello, Bob Hello, Charlie
+
+
+3. reduce(): Combines elements into a single result.
+The reduce() method is a terminal operation that combines the elements of a stream using an associative accumulation function. It takes two arguments:
+
+An identity value (the initial value for the reduction).
+
+A binary operator function (a function that combines two elements of the stream).
+
+The reduce() method returns an Optional<T> because it may not return a value if the stream is empty (e.g., when reducing an empty stream).
+
+Example:
+
+List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+
+// Sum the numbers using reduce()
+int sum = numbers.stream()
+                 .reduce(0, (a, b) -> a + b);  // Identity is 0, binary operator is addition
+
+System.out.println(sum);  // Output: 15
+Explanation:
+0 is the identity value.
+
+(a, b) -> a + b is the binary operator that combines the elements.
+
+This operation is associative, meaning the order of the elements doesn’t affect the result.
+
+Example with Optional:
+
+List<Integer> numbers = Arrays.asList();
+
+Optional<Integer> sum = numbers.stream()
+                               .reduce((a, b) -> a + b);
+
+System.out.println(sum.orElse(0));  // Output: 0 (as the stream is empty)
+
+
+4. count(): Counts the number of elements in the stream.
+The count() method is a terminal operation that returns the number of elements in the stream. It does not take any arguments and simply counts how many elements are in the stream after any intermediate operations are applied.
+
+Example:
+
+List<String> names = Arrays.asList("Alice", "Bob", "Charlie", "David");
+
+long count = names.stream().count();
+
+System.out.println(count);  // Output: 4
+Note:
+count() is particularly useful when you need to know how many elements match a condition. For example, you can combine filter() and count() to count elements that satisfy a condition.
+
+long evenCount = numbers.stream()
+                        .filter(n -> n % 2 == 0)
+                        .count();
+
+System.out.println(evenCount);  // Output: 2 if numbers = [1, 2, 3, 4, 5]
+
+
+5. anyMatch(), allMatch(), noneMatch(): Tests whether a condition is met.
+These methods are terminal operations that test whether elements in a stream match a given condition. They all return a boolean result.
+
+anyMatch():
+anyMatch() checks if any element in the stream matches the given predicate.
+
+Returns true if at least one element satisfies the condition, otherwise false.
+
+Example:
+
+List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+
+boolean hasEven = numbers.stream()
+                         .anyMatch(n -> n % 2 == 0);  // Checks if any number is even
+
+System.out.println(hasEven);  // Output: true
+allMatch():
+allMatch() checks if all elements in the stream match the given predicate.
+
+Returns true if every element satisfies the condition, otherwise false.
+
+Example:
+boolean allEven = numbers.stream()
+                         .allMatch(n -> n % 2 == 0);  // Checks if all numbers are even
+
+System.out.println(allEven);  // Output: false
+noneMatch():

@@ -1,0 +1,54 @@
+-->What is a Functional Interface?
+A functional interface is an interface with exactly one abstract method —
+this is what allows it to be used with lambda expressions or method references.
+
+Example : @FunctionalInterface
+          interface MyFunc {
+              void doSomething();  // Only one abstract method
+          }
+
+Then use it like this: MyFunc mf = () -> System.out.println("Doing something!");
+                       mf.doSomething(); // Output: Doing something!
+
+-->Functional Interface Rules
+   .Must have only one abstract method.
+
+   .Can have any number of default/static methods.
+
+   .If it has more than one abstract method, it won't compile
+     (if annotated with @FunctionalInterface).
+
+-->Real example with built-in interface:
+
+   Function<String, Integer> stringLength = str -> str.length();
+   System.out.println(stringLength.apply("Hello")); // 5
+
+   Predicate<Integer> isEven = n -> n % 2 == 0;
+   System.out.println(isEven.test(4)); // true
+
+   Consumer<String> greeter = name -> System.out.println("Hello, " + name);
+   greeter.accept("Alice"); // Hello, Alice
+
+   Supplier<String> generator = () -> "RandomString";
+   System.out.println(generator.get()); // RandomString
+
+
+-->Common Mistake to Avoid:
+   If you add two abstract methods, the interface is no longer functional:
+
+   @FunctionalInterface
+   interface Invalid {
+       void doSomething();
+       void doSomethingElse(); // Now this is not functional
+   }
+
+
+-->When to Create Your Own Functional Interface
+   Use your own if:
+
+   No built-in interface fits your method signature.
+
+   You want to give your method a meaningful name.
+
+   You’re designing your own mini-framework, config system, or plugin system.
+

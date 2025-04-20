@@ -1,0 +1,116 @@
+Optional Class :
+
+The Optional class in Java is a container object that may or may not contain a value. It's a way to deal with null values
+and is introduced in Java 8 as part of the java.util package. The Optional class helps in avoiding NullPointerExceptions
+and provides more readable and concise code when working with potential null values.
+
+Why Use Optional?
+In traditional Java programming, handling null values often leads to NullPointerExceptions. You would typically check for
+null before performing operations on objects. However, this can result in boilerplate code and the risk of missing such
+checks. The Optional class helps to express the possibility of absence of a value in a more declarative and safe manner,
+encouraging developers to explicitly handle the absence of values.
+
+Key Features of the Optional Class:
+Represents an optional value: It either contains a value (non-null) or is empty (null).
+
+Helps to avoid NullPointerException: By using Optional, you explicitly handle cases where a value might be absent.
+
+Provides utility methods: To manage optional values in a cleaner and more readable manner.
+
+Commonly Used Methods in Optional
+1. of()
+Creates an Optional containing the specified non-null value. If the value is null, it throws a NullPointerException.
+
+Optional<String> optional = Optional.of("Hello");
+System.out.println(optional.get());  // Outputs: Hello
+
+
+2. empty()
+Returns an empty Optional (i.e., one that doesn't contain a value).
+
+Optional<String> emptyOptional = Optional.empty();
+System.out.println(emptyOptional.isPresent());  // Outputs: false
+
+
+3. ofNullable()
+Creates an Optional that may or may not contain a value. If the value is null, it returns an empty Optional.
+
+Optional<String> optionalWithNull = Optional.ofNullable(null);
+System.out.println(optionalWithNull.isPresent());  // Outputs: false
+
+Optional<String> optionalWithValue = Optional.ofNullable("Hello");
+System.out.println(optionalWithValue.get());  // Outputs: Hello
+
+
+4. isPresent()
+Returns true if there is a value present in the Optional, otherwise false.
+
+Optional<String> optional = Optional.of("Hello");
+System.out.println(optional.isPresent());  // Outputs: true
+
+Optional<String> emptyOptional = Optional.empty();
+System.out.println(emptyOptional.isPresent());  // Outputs: false
+
+
+5. ifPresent()
+If a value is present, it executes the provided lambda expression. If not, it does nothing.
+
+Optional<String> optional = Optional.of("Hello");
+
+optional.ifPresent(value -> System.out.println(value.toUpperCase()));  // Outputs: HELLO
+
+
+6. get()
+Returns the value if present, otherwise throws NoSuchElementException if the value is not present. You should avoid using get() unless you are sure that the value is present.
+
+Optional<String> optional = Optional.of("Hello");
+System.out.println(optional.get());  // Outputs: Hello
+
+
+7. orElse()
+Returns the value if present, otherwise returns the specified default value.
+
+Optional<String> optional = Optional.ofNullable(null);
+String result = optional.orElse("Default");
+System.out.println(result);  // Outputs: Default
+
+
+8. orElseGet()
+Similar to orElse(), but the default value is provided by a supplier (a function that returns the default value).
+
+Optional<String> optional = Optional.ofNullable(null);
+String result = optional.orElseGet(() -> "Default from Supplier");
+System.out.println(result);  // Outputs: Default from Supplier
+
+
+9. orElseThrow()
+Returns the value if present, otherwise throws an exception specified by the argument.
+
+Optional<String> optional = Optional.ofNullable(null);
+String result = optional.orElseThrow(() -> new IllegalArgumentException("Value not present"));
+
+
+10. map()
+If a value is present, it applies the given function to the value and returns an Optional containing the transformed value. If the value is not present, it returns an empty Optional.
+
+Optional<String> optional = Optional.of("Hello");
+Optional<String> upperCaseOptional = optional.map(String::toUpperCase);
+System.out.println(upperCaseOptional.get());  // Outputs: HELLO
+
+
+11. flatMap()
+Similar to map(), but it expects the function to return an Optional. It is useful when you need to transform a value and wrap it into an Optional.
+
+Optional<String> optional = Optional.of("Hello");
+Optional<String> result = optional.flatMap(value -> Optional.of(value.toUpperCase()));
+System.out.println(result.get());  // Outputs: HELLO
+
+
+12. filter()
+If the value is present and the value matches the given predicate, it returns the same Optional. If the value is not present or the predicate is not satisfied, it returns an empty Optional.
+
+Optional<String> optional = Optional.of("Hello");
+Optional<String> filteredOptional = optional.filter(value -> value.startsWith("H"));
+System.out.println(filteredOptional.get());  // Outputs: Hello
+
+

@@ -1,0 +1,115 @@
+What is a Lambda Expression?
+A Lambda Expression is a short block of code that takes in parameters and returns a value. It can be used in place of an anonymous class implementation of a functional interface.
+
+Basic Syntax : (parameters) -> expression
+               // or
+               (parameters) -> { statements }
+
+Example:
+-->Lambda + Functional Interface
+Lambda expressions must be assigned to a functional interface, because Java needs to infer the expected method signature.
+
+@FunctionalInterface
+interface StringLength {
+    int getLength(String s);
+}
+
+StringLength sl = s -> s.length();
+System.out.println(sl.getLength("Hello")); // 5
+
+-->Lambda Expressions in Collections and Streams
+This is where lambdas shine:
+
+Filtering a List:
+
+List<String> names = Arrays.asList("Anna", "Bob", "Alex");
+names.stream()
+     .filter(name -> name.startsWith("A"))
+     .forEach(System.out::println);
+
+Sorting:
+
+List<String> names = Arrays.asList("Charlie", "Bob", "Alice");
+
+names.sort((a, b) -> a.compareTo(b));  // Ascending order
+
+
+-->Lambda with Custom Functional Interface
+
+@FunctionalInterface
+interface Calculator {
+    int calculate(int a, int b);
+}
+
+public class LambdaTest {
+    public static void main(String[] args) {
+        Calculator add = (a, b) -> a + b;
+        Calculator multiply = (a, b) -> a * b;
+
+        System.out.println(add.calculate(5, 3));      // 8
+        System.out.println(multiply.calculate(5, 3)); // 15
+    }
+}
+
+-->"Can we use lambda in switch case?"
+
+   The direct answer is:
+
+   ➡ No, Java does not allow you to write a lambda directly inside a switch case block like this:
+
+   //  This does NOT work
+   switch (input) {
+       case "A" -> () -> System.out.println("You chose A"); // Invalid
+   }
+
+   But... you can combine lambdas with switch in other ways that are clean and powerful. Let me show you an easy way with code examples 👇
+
+   ✅ Example 1: Using switch with functional interface (Java 8 compatible)
+   We create an interface like this:
+
+   @FunctionalInterface
+   interface Action {
+       void execute();
+   }
+   Then use switch to assign a lambda:
+
+   String input = "A";
+   Action action;
+
+   switch (input) {
+       case "A":
+           action = () -> System.out.println("You chose A");
+           break;
+       case "B":
+           action = () -> System.out.println("You chose B");
+           break;
+       default:
+           action = () -> System.out.println("Invalid choice");
+           break;
+   }
+
+   // Call the lambda
+   action.execute();
+   ✅ Output if input = "A":
+
+   You chose A
+
+-->Limitations of Lambdas
+Can only be used with functional interfaces.
+
+No checked exceptions directly (must wrap or handle).
+
+
+String greeting = "Hi"; // must be effectively final
+
+Runnable r = () -> System.out.println(greeting);
+
+-->Real-World Use Cases
+Writing cleaner Comparator logic
+
+Replacing anonymous classes for Runnable, Callable, etc.
+
+Stream transformations (map, filter, reduce)
+
+Event handling in GUIs
+

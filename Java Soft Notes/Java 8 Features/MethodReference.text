@@ -1,0 +1,146 @@
+4. Method References
+Method references are a shorthand for calling a method directly using the :: operator,
+ instead of using lambda expressions.
+
+ or
+
+ In Java 8, method references are a shorthand way of referring to a method of a class or
+  an object using the :: syntax, instead of using a full lambda expression. They can make
+  code more concise and readable, especially when the lambda expression is simply calling an existing method.
+
+ Overview of Method References
+ Method references provide a way to directly refer to methods in a more compact form compared to lambda expressions. A method reference essentially points to a method by its name and is often used in places where you’d normally use a lambda expression.
+
+ The syntax for method references is: ClassName::methodName
+
+Example:
+
+List<String> names = Arrays.asList("Alice", "Bob", "Charlie");
+names.forEach(System.out::println);
+
+
+*****************************************************************************************************************
+
+There are four primary types of method references:
+
+1.Reference to a static method
+
+2.Reference to an instance method of a particular object
+
+3.Reference to an instance method of an arbitrary object
+
+4.Reference to a constructor
+
+1. Reference to a Static Method
+A static method reference refers to a static method of a class. It is used when you want to call a static method without creating an instance of the class.
+
+Syntax:
+ClassName::staticMethodName
+
+Example:
+import java.util.*;
+
+public class MethodReferenceExample {
+    // Static method
+    public static void printMessage(String message) {
+        System.out.println(message);
+    }
+
+    public static void main(String[] args) {
+        List<String> messages = Arrays.asList("Hello", "Java", "8");
+
+        // Using method reference to refer to the static method
+        messages.forEach(MethodReferenceExample::printMessage);
+    }
+}
+Explanation:
+MethodReferenceExample::printMessage is a method reference to the static method printMessage.
+
+This is equivalent to using the lambda expression message -> printMessage(message).
+
+2. Reference to an Instance Method of a Particular Object
+This type of method reference refers to an instance method of a specific object. You can use it when the method needs to be invoked on an existing object.
+
+Syntax:
+instance::instanceMethodName
+
+Example:
+import java.util.*;
+
+public class MethodReferenceExample {
+    // Instance method
+    public void printMessage(String message) {
+        System.out.println(message);
+    }
+
+    public static void main(String[] args) {
+        MethodReferenceExample obj = new MethodReferenceExample();
+        List<String> messages = Arrays.asList("Hello", "Java", "8");
+
+        // Using method reference to refer to the instance method
+        messages.forEach(obj::printMessage);
+    }
+}
+This is equivalent to the lambda expression message -> obj.printMessage(message).
+
+
+3. Reference to an Instance Method of an Arbitrary Object of a Particular Type
+This type of method reference refers to an instance method of an arbitrary object of a certain class or type. It is used when you don’t have a specific object in mind but want to invoke an instance method on each element in a collection or stream.
+
+Syntax:
+ClassName::instanceMethodName
+
+Example:
+
+import java.util.*;
+
+public class MethodReferenceExample {
+    // Instance method
+    public void printMessage(String message) {
+        System.out.println(message);
+    }
+
+    public static void main(String[] args) {
+        List<String> messages = Arrays.asList("Hello", "Java", "8");
+
+        // Using method reference to refer to the instance method of String class
+        messages.forEach(System.out::println);
+    }
+}
+Explanation:
+System.out::println is a method reference to the println method of the System.out object.
+
+This is equivalent to the lambda expression message -> System.out.println(message).
+
+4. Reference to a Constructor
+A constructor reference refers to a constructor of a class. It is used when you want to create a new instance of a class via a method reference, typically in factory-like scenarios or when working with streams or collections.
+
+Syntax:
+ClassName::new
+
+Example:
+import java.util.*;
+
+public class MethodReferenceExample {
+    // Constructor
+    public MethodReferenceExample(String message) {
+        System.out.println(message);
+    }
+
+    public static void main(String[] args) {
+        List<String> messages = Arrays.asList("Hello", "Java", "8");
+
+        // Using constructor reference to create instances
+        messages.forEach(message -> new MethodReferenceExample(message));
+        // Equivalent to using a constructor reference:
+        messages.forEach(MethodReferenceExample::new);
+    }
+}
+Explanation:
+MethodReferenceExample::new refers to the constructor of the MethodReferenceExample class.
+
+This is equivalent to the lambda expression message -> new MethodReferenceExample(message).
+**************************************************************************************************************
+
+
+
