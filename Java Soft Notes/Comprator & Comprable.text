@@ -1,0 +1,11 @@
+Sorting In Collection : For Sorting in collection we should follow three rules :
+1.Object Should be Homogenius .
+2.Object Should Comparable
+3.Object should not be null .
+
+To make the object as comprable we have two inbuild functional interface
+
+1.comprator
+2.Comprable
+
+1.Comprable : Comparable is functional interface which is used to compare the objects in the collection . In this we are used to compareTo() ,method .

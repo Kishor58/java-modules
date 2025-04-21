@@ -1,0 +1,150 @@
+What is Multitasking?
+Multitasking means doing multiple tasks at the same time.
+
+Just like humans can:
+
+Talk on the phone while walking
+
+Listen to music while cooking
+
+Computers can also perform multiple tasks simultaneously — this is called multitasking.
+
+💻 In Computers:
+Multitasking allows the CPU to switch between tasks so quickly that it feels like everything is happening at the same time.
+
+✅ Two Main Types of Multitasking:
+
+Type	Description
+Process-based	Multiple programs/processes run at the same time
+Thread-based	A single program runs multiple tasks (threads) at the same time
+🔹 1. Process-based Multitasking
+Each task is a separate program.
+
+Example: You open Chrome, Spotify, and Word at the same time — each is a separate process.
+
+Each process has its own memory space.
+
+✅ Example in OS: Opening MS Word + Zoom + Calculator.
+
+🔹 2. Thread-based Multitasking
+A single program has multiple threads running simultaneously.
+
+More lightweight and faster than process-based.
+
+Threads share the same memory.
+
+✅ Example in Java: In a music player app:
+
+One thread plays music.
+
+Another thread updates the UI.
+
+Another thread downloads the album cover.
+
+***************************************************************************
+What is Multithreading in Java?
+Multithreading is Java's way of doing thread-based multitasking —
+letting a program do multiple things at the same time using threads.
+
+✅ What is a Thread?
+A thread is a lightweight subprocess.
+Think of it as:
+.A unit of work
+.Running independently, but inside the same program
+.Shares the same memory with other threads
+
+🧠 Real-Life Example:
+Imagine a restaurant:
+
+🍽️ One waiter (main thread) takes orders.
+
+🔥 A cook (thread 1) prepares food.
+
+🧼 Another person (thread 2) washes dishes.
+
+All working at the same time but within the same restaurant (Java program).
+
+**************************************************************************************
+What Are the Ways to Create Threads in Java?
+Java provides 3 main ways to create threads:
+
+By extending the Thread class
+
+By implementing the Runnable interface
+
+By using ExecutorService (Thread pool) — used in large-scale/multithreaded applications (advanced and recommended in production)
+
+1️⃣ Extending the Thread Class
+✅ Concept:
+You create a class that extends the Thread class and override the run() method. Then call start() to begin a new thread.
+
+💻 Code:
+
+class MyThread extends Thread {
+    public void run() {
+        for (int i = 1; i <= 3; i++) {
+            System.out.println("🍔 Cooking - " + i);
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        MyThread t1 = new MyThread();
+        t1.start();  // Starts the thread
+
+        for (int i = 1; i <= 3; i++) {
+            System.out.println("🧾 Taking Order - " + i);
+        }
+    }
+}
+🧠 Analogy:
+You run a fast food shop.
+
+One person (Thread 1) is cooking.
+
+Another (main thread) is taking orders.
+
+They both run at the same time.
+
+2️⃣ Implementing the Runnable Interface
+✅ Concept:
+You define the task logic inside the run() method of a class that implements Runnable. Then, create a Thread object and pass the Runnable object to it.
+
+💻 Code:
+java
+Copy
+Edit
+class ChatBot implements Runnable {
+    public void run() {
+        for (int i = 1; i <= 3; i++) {
+            System.out.println("🤖 Bot is replying - " + i);
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        ChatBot bot = new ChatBot();
+        Thread t1 = new Thread(bot);
+        t1.start();  // Starts thread
+
+        for (int i = 1; i <= 3; i++) {
+            System.out.println("👤 User typing - " + i);
+        }
+    }
+}
+🧠 Analogy:
+You're chatting with a bot:
+
+The bot replies automatically (thread 1).
+
+You’re typing a message (main thread).
+
+✅ Runnable is more flexible than Thread, because:
+
+You can still extend other classes
+
+It decouples task from thread — better for large apps
+
+
