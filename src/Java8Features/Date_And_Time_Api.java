@@ -12,7 +12,7 @@ public class Date_And_Time_Api {
         LocalTime time=LocalTime.now();
         System.out.println(time);
 
-        LocalDate birthday=LocalDate.of(2001,06,03);
+        LocalDate birthday=LocalDate.of(2000,04,02);
         LocalDate today=LocalDate.now();
 
         Period p=Period.between(birthday,today);

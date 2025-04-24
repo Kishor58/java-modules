@@ -112,9 +112,7 @@ They both run at the same time.
 You define the task logic inside the run() method of a class that implements Runnable. Then, create a Thread object and pass the Runnable object to it.
 
 💻 Code:
-java
-Copy
-Edit
+
 class ChatBot implements Runnable {
     public void run() {
         for (int i = 1; i <= 3; i++) {
@@ -146,5 +144,40 @@ You’re typing a message (main thread).
 You can still extend other classes
 
 It decouples task from thread — better for large apps
+*******************************************************************************************
+
+Defining a thread there is two ways :
+1.By extending Thread Class
+2.By implementing Runnable interface
+
+1. Thread Class
+The Thread class is used to create and control threads.
+You can create a custom thread by extending the Thread class.
+The thread’s task is written inside the run() method.
+The thread is started using the start() method.
+
+2. Runnable Interface
+Runnable is a functional interface with a single run() method.
+It is used to define the task a thread should perform.
+It is preferred over extending the Thread class.
+Useful with lambda expressions and thread pools.
+
+3. start() Method
+The start() method is used to begin a new thread.
+It creates a new call stack for the thread and internally calls the run() method.
+Calling run() directly will not start a new thread; it will run on the current thread.
+
+4. run() Method
+This method contains the code that will be executed by the thread.
+It is called automatically when the start() method is invoked.
+It can be overridden in the Thread class or defined in a Runnable implementation.
+
+5. sleep() Method
+The sleep() method pauses the execution of the current thread for a specified time.
+It takes time in milliseconds as an argument.
+It throws InterruptedException, which must be handled.
+Useful for simulating delays, controlling task execution timing, or creating wait intervals.
+
+
 
 
